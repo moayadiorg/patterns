@@ -1,0 +1,101 @@
+# Pattern Metadata
+title: "Lambda Function with SQS Queue Processing"
+description: "Event-driven message processing from Amazon SQS using AWS Lambda with automatic retries and dead-letter queue"
+type: "pattern"
+
+# Author Information
+author:
+  name: "John Architect"
+  email: "john@example.com"
+  github: "johnarchitect"
+  organization: "Tech Solutions Inc"
+
+# Pattern Classification
+category: "messaging"
+complexity: "beginner"
+
+# Tags for discoverability
+tags:
+  - "aws"
+  - "lambda"
+  - "sqs"
+  - "event-driven"
+  - "serverless"
+  - "message-queue"
+
+# Technologies Used
+technologies:
+  - name: "AWS Lambda"
+    type: "compute"
+  - name: "Amazon SQS"
+    type: "messaging"
+  - name: "Amazon CloudWatch"
+    type: "monitoring"
+  - name: "AWS IAM"
+    type: "security"
+
+# Detailed Use Case
+use_case: |
+  This pattern demonstrates how to process messages from an Amazon SQS queue using AWS Lambda functions.
+  It's ideal for decoupling microservices, handling asynchronous workloads, and building scalable event-driven
+  architectures. The pattern includes automatic retries, dead-letter queue for failed messages, and CloudWatch
+  monitoring for observability. Use this when you need to process messages at scale without managing servers.
+
+# Architecture Diagram
+architecture_diagram: "diagrams/architecture.png"
+
+# Prerequisites
+prerequisites:
+  - "AWS Account with appropriate permissions"
+  - "AWS CLI installed and configured"
+  - "Node.js 18+ or Python 3.9+"
+  - "Basic understanding of Lambda and SQS"
+
+# Implementation Details
+implementation:
+  language: "javascript"
+  framework: "SAM"
+  repo_url: "https://github.com/YOUR_ORG/catalog/tree/main/patterns/lambda-sqs-processing"
+  code_snippets:
+    - file: "implementation/handler.js"
+      title: "Lambda Handler Function"
+      description: "Main Lambda function that processes SQS messages with error handling and logging"
+      language: "javascript"
+    - file: "implementation/template.yaml"
+      title: "AWS SAM Template"
+      description: "Infrastructure as Code definition including SQS queue, DLQ, and Lambda function configuration"
+      language: "yaml"
+
+# Cost Estimation
+estimated_cost: "< $1/month"
+
+# Performance Characteristics
+performance:
+  latency: "< 100ms per message"
+  throughput: "Up to 10,000 messages/sec"
+  scalability: "Horizontal"
+
+# Security Considerations
+security:
+  - "Lambda function has least-privilege IAM role with only SQS read permissions"
+  - "Messages are encrypted in transit and at rest using AWS KMS"
+  - "VPC configuration optional for accessing private resources"
+  - "Dead-letter queue for failed message analysis"
+
+# Limitations and Considerations
+limitations:
+  - "Lambda timeout of 15 minutes maximum"
+  - "SQS message size limited to 256 KB"
+  - "Visibility timeout must be configured appropriately"
+  - "Cold start latency for infrequently invoked functions"
+
+# Related Patterns
+related_patterns:
+  - "lambda-sns-fanout"
+  - "eventbridge-lambda-processing"
+
+# Metadata
+created_date: "2024-11-01"
+last_updated: "2024-11-01"
+version: "1.0.0"
+status: "active"

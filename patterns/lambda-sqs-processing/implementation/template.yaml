@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda Function with SQS Queue Processing
+
+Resources:
+  # SQS Queue
+  ProcessingQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: message-processing-queue
+      VisibilityTimeout: 300
+      MessageRetentionPeriod: 345600
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn
+        maxReceiveCount: 3
+
+  # Dead Letter Queue
+  DeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: message-processing-dlq
+      MessageRetentionPeriod: 1209600
+
+  # Lambda Function
+  ProcessorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: handler.handler
+      Runtime: nodejs18.x
+      MemorySize: 512
+      Timeout: 60
+      Events:
+        SQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt ProcessingQueue.Arn
+            BatchSize: 10
+      Policies:
+        - SQSPollerPolicy:
+            QueueName: !GetAtt ProcessingQueue.QueueName
+
+Outputs:
+  QueueURL:
+    Description: URL of the SQS Queue
+    Value: !Ref ProcessingQueue
+
+  FunctionArn:
+    Description: ARN of the Lambda Function
+    Value: !GetAtt ProcessorFunction.Arn

@@ -4,6 +4,7 @@
 # Basic Information
 title: "Your Pattern Title"
 description: "Brief one-line description of what this pattern accomplishes"
+type: "pattern"  # Options: pattern, workflow, application, pov
 
 # Author Information
 author:
