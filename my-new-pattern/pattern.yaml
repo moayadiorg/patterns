@@ -1,0 +1,91 @@
+# Pattern Metadata Template
+# Copy this template to create a new pattern submission
+
+# Basic Information
+title: "Moayad New Patter"
+description: "Brief one-line description of what this pattern accomplishes"
+
+# Author Information
+author:
+  name: "Moayad Ismail"
+  email: "moayad.ismail@ibm.com"
+  github: "moayad-ismail"
+  organization: "IBM"
+
+# Pattern Classification
+# Valid categories are defined in ../categories.config.json
+# Current options: automation, observability, security, monitoring, integration, data-protection
+category: "automation"
+
+# Tags for discoverability (add relevant tags)
+tags:
+  - "example-tag-1"
+  - "example-tag-2"
+  - "example-tag-3"
+
+# Technologies Used
+# List all technologies, services, or tools used in this pattern
+technologies:
+  - name: "TFE"
+    type: "HashiCorp" 
+  - name: "Turbonomics"
+    type: "IBM5"
+
+# Detailed Use Case
+use_case: |
+  Provide a detailed description of the use case this pattern addresses.
+  Explain the problem it solves and when it should be used.
+  You can use multiple lines for this description.
+
+# Architecture Diagram
+# Relative path to the architecture diagram image
+architecture_diagram: "diagrams/architecture.png"
+
+# Prerequisites
+# List everything needed before implementing this pattern
+prerequisites:
+  - "Prerequisite 1 (e.g., AWS Account)"
+  - "Prerequisite 2 (e.g., Node.js 18+)"
+  - "Prerequisite 3 (e.g., Specific SDK or CLI)"
+
+# Implementation Details (Optional)
+implementation:
+  # Link to implementation code repository or directory
+  repo_url: "https://github.com/your-org/your-repo" # Optional
+  language: "javascript" # Options: javascript, python, java, go, typescript, csharp, other
+  framework: "terraform" # Options: SAM, CDK, Terraform, CloudFormation, Pulumi, other, none
+
+  # Code snippets to display on the pattern page (Optional)
+  # These files should be placed in the implementation/ directory
+  code_snippets:
+    - file: "implementation/handler.js"
+      title: "Lambda Handler Function"
+      description: "Main Lambda function that processes SQS messages"
+      language: "javascript"
+
+
+# Security Considerations (Optional)
+security:
+  - "Security consideration 1"
+  - "Security consideration 2"
+
+# Limitations and Considerations (Optional)
+limitations:
+  - "Known limitation 1"
+  - "Known limitation 2"
+
+# Related Patterns (Optional)
+# List IDs of related patterns
+related_patterns:
+  - "pattern-id-1"
+# Metadata
+  - "pattern-id-2"
+
+related_plays:
+  - "play-id-1"
+  - "play-id-2"
+
+created_date: "2024-01-15" # YYYY-MM-DD format
+last_updated: "2024-01-15" # YYYY-MM-DD format
+version: "1.0.0" # Semantic versioning
+status: "active" # Options: active, deprecated, experimental
