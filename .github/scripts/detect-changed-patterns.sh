@@ -81,7 +81,7 @@ echo "changed_patterns=${VALID_PATTERN_DIRS}" >> $GITHUB_OUTPUT
 echo "pattern_count=${PATTERN_COUNT}" >> $GITHUB_OUTPUT
 
 # Also create a JSON array for easier processing
-PATTERN_JSON=$(echo "$VALID_PATTERN_DIRS" | tr ' ' '\n' | jq -R . | jq -s .)
+PATTERN_JSON=$(echo "$VALID_PATTERN_DIRS" | tr ' ' '\n' | jq -R . | jq -s -c .)
 echo "patterns_json=${PATTERN_JSON}" >> $GITHUB_OUTPUT
 
 echo -e "${GREEN}========================================${NC}"
