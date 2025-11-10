@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pattern Categories Configuration",
+  "description": "Centralized configuration for pattern categories. This file serves as the single source of truth for valid pattern categories.",
+  "version": "1.0.0",
+  "categories": [
+    {
+      "id": "automation",
+      "name": "Automation",
+      "description": "Automated workflows and processes for infrastructure, deployment, and operational tasks",
+      "icon": "🤖",
+      "examples": [
+        "CI/CD pipelines",
+        "Infrastructure as Code",
+        "Automated testing",
+        "Scheduled tasks"
+      ]
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "description": "Monitoring, logging, tracing, and performance analysis patterns",
+      "icon": "👁️",
+      "examples": [
+        "Distributed tracing",
+        "Centralized logging",
+        "APM solutions",
+        "Metrics collection"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "description": "Security controls, compliance, and protection patterns",
+      "icon": "🔒",
+      "examples": [
+        "Identity and access management",
+        "Secrets management",
+        "Security scanning",
+        "Compliance automation"
+      ]
+    },
+    {
+      "id": "monitoring",
+      "name": "Monitoring",
+      "description": "System and application monitoring, alerting, and health checks",
+      "icon": "📊",
+      "examples": [
+        "Health checks",
+        "Uptime monitoring",
+        "Alerting systems",
+        "Dashboard creation"
+      ]
+    },
+    {
+      "id": "integration",
+      "name": "Integration",
+      "description": "System integration, API management, and data synchronization patterns",
+      "icon": "🔗",
+      "examples": [
+        "API integration",
+        "Event-driven architecture",
+        "Message queues",
+        "Data synchronization"
+      ]
+    },
+    {
+      "id": "data-protection",
+      "name": "Data Protection",
+      "description": "Data backup, recovery, and protection strategies",
+      "icon": "💾",
+      "examples": [
+        "Backup automation",
+        "Disaster recovery",
+        "Data replication",
+        "Snapshot management"
+      ]
+    }
+  ]
+}
