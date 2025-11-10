@@ -1,0 +1,132 @@
+name: Validate Pattern Submission
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - '**'
+      - '!.github/**'
+      - '!README.md'
+      - '!LICENSE'
+      - '!.gitignore'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  detect-changes:
+    name: Detect Changed Patterns
+    runs-on: ubuntu-latest
+    outputs:
+      changed_patterns: ${{ steps.detect.outputs.changed_patterns }}
+      pattern_count: ${{ steps.detect.outputs.pattern_count }}
+      patterns_json: ${{ steps.detect.outputs.patterns_json }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed patterns
+        id: detect
+        run: |
+          chmod +x .github/scripts/detect-changed-patterns.sh
+          .github/scripts/detect-changed-patterns.sh
+
+      - name: Summary
+        run: |
+          echo "## 🔍 Detection Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Patterns detected:** ${{ steps.detect.outputs.pattern_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.detect.outputs.pattern_count }}" != "0" ]; then
+            echo "**Changed patterns:**" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "${{ steps.detect.outputs.changed_patterns }}" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          else
+            echo "_No pattern changes detected in this PR._" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  validate-patterns:
+    name: Validate Pattern
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.pattern_count != '0'
+    strategy:
+      matrix:
+        pattern: ${{ fromJson(needs.detect-changes.outputs.patterns_json) }}
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: .github/scripts/package.json
+
+      - name: Install dependencies
+        working-directory: .github/scripts
+        run: npm ci
+
+      - name: Validate pattern
+        id: validate
+        working-directory: .github/scripts
+        run: |
+          echo "Validating pattern: ${{ matrix.pattern }}"
+          node validate-pattern.js "../../${{ matrix.pattern }}"
+
+      - name: Upload validation results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-results-${{ matrix.pattern }}
+          path: |
+            ${{ matrix.pattern }}/pattern.yaml
+            ${{ matrix.pattern }}/README.md
+          retention-days: 7
+
+  validate-summary:
+    name: Validation Summary
+    runs-on: ubuntu-latest
+    needs: [detect-changes, validate-patterns]
+    if: always() && needs.detect-changes.outputs.pattern_count != '0'
+    steps:
+      - name: Check validation results
+        run: |
+          echo "## ✅ Pattern Validation Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "All pattern validations have been executed." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Validated patterns:** ${{ needs.detect-changes.outputs.pattern_count }}" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ needs.validate-patterns.result }}" == "success" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "✅ **All validations passed!**" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ needs.validate-patterns.result }}" == "failure" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "❌ **Some validations failed. Please check the logs above.**" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+  no-patterns-detected:
+    name: No Pattern Changes
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.pattern_count == '0'
+    steps:
+      - name: Summary
+        run: |
+          echo "## ℹ️ No Pattern Changes Detected" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "This PR does not contain any pattern changes." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Pattern validation is skipped." >> $GITHUB_STEP_SUMMARY

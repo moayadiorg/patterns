@@ -1,0 +1,155 @@
+name: Notify SME Reviewers
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - master
+    paths:
+      - '**'
+      - '!.github/**'
+      - '!README.md'
+      - '!LICENSE'
+      - '!.gitignore'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  detect-and-notify:
+    name: Detect Patterns and Notify Reviewers
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: .github/scripts/package.json
+
+      - name: Install dependencies
+        working-directory: .github/scripts
+        run: npm ci
+
+      - name: Detect changed patterns
+        id: detect
+        run: |
+          chmod +x .github/scripts/detect-changed-patterns.sh
+          .github/scripts/detect-changed-patterns.sh
+
+      - name: Identify reviewers
+        id: reviewers
+        if: steps.detect.outputs.pattern_count != '0'
+        working-directory: .github/scripts
+        run: |
+          echo "Identifying reviewers for patterns..."
+          node notify-reviewers.js ${{ steps.detect.outputs.changed_patterns }}
+
+      - name: Add PR comment
+        if: steps.detect.outputs.pattern_count != '0' && steps.reviewers.outputs.pr_comment != ''
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const comment = `${{ steps.reviewers.outputs.pr_comment }}`;
+
+            // Check if we already posted a comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('Pattern Review Assignments')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+              console.log('Updated existing reviewer notification comment');
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+              console.log('Created new reviewer notification comment');
+            }
+
+      - name: Request reviews
+        if: steps.detect.outputs.pattern_count != '0' && steps.reviewers.outputs.reviewers != '[]'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const reviewers = ${{ steps.reviewers.outputs.reviewers }};
+
+            if (reviewers.length > 0) {
+              try {
+                await github.rest.pulls.requestReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.issue.number,
+                  reviewers: reviewers
+                });
+                console.log(`Requested reviews from: ${reviewers.join(', ')}`);
+              } catch (error) {
+                // This may fail if reviewers don't exist or don't have access
+                console.log(`Note: Could not auto-assign reviewers. Error: ${error.message}`);
+                console.log('SMEs are still notified via the PR comment.');
+              }
+            }
+
+      - name: Add labels
+        if: steps.detect.outputs.pattern_count != '0'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const labels = ['pattern-submission', 'needs-review'];
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: labels
+            });
+            console.log(`Added labels: ${labels.join(', ')}`);
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 🔔 Reviewer Notification Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ steps.detect.outputs.pattern_count }}" == "0" ]; then
+            echo "ℹ️ No pattern changes detected. Skipping reviewer notification." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Patterns detected:** ${{ steps.detect.outputs.pattern_count }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            if [ "${{ steps.reviewers.outputs.reviewer_count }}" != "" ]; then
+              echo "**Reviewers identified:** ${{ steps.reviewers.outputs.reviewer_count }}" >> $GITHUB_STEP_SUMMARY
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "✅ SME reviewers have been notified via PR comment." >> $GITHUB_STEP_SUMMARY
+            else
+              echo "⚠️ No reviewers could be identified." >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
