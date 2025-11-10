@@ -29,7 +29,7 @@ technologies:
   - name: "TFE"
     type: "HashiCorp" 
   - name: "Turbonomics"
-    type: "IBM1"
+    type: "IBM2"
 
 # Detailed Use Case
 use_case: |
