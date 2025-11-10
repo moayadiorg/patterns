@@ -120,38 +120,11 @@ class PatternValidator {
     return allFilesExist;
   }
 
-  /**
-   * Load and validate categories config
-   */
-  loadCategoriesConfig(repoRoot) {
-    const categoriesPath = path.join(repoRoot, 'categories.config.json');
-
-    if (!fs.existsSync(categoriesPath)) {
-      this.error('categories.config.json not found in repository root');
-      return null;
-    }
-
-    try {
-      const categoriesData = fs.readFileSync(categoriesPath, 'utf8');
-      const config = JSON.parse(categoriesData);
-
-      if (!config.categories || !Array.isArray(config.categories)) {
-        this.error('categories.config.json does not contain a valid "categories" array');
-        return null;
-      }
-
-      this.success('Loaded categories.config.json');
-      return config.categories.map(cat => cat.id);
-    } catch (error) {
-      this.error(`Failed to parse categories.config.json: ${error.message}`);
-      return null;
-    }
-  }
 
   /**
    * Validate pattern.yaml against JSON Schema
    */
-  async validatePatternYaml(patternDir, validCategories, repoRoot) {
+  async validatePatternYaml(patternDir, repoRoot) {
     const patternYamlPath = path.join(patternDir, 'pattern.yaml');
 
     if (!fs.existsSync(patternYamlPath)) {
@@ -198,18 +171,7 @@ class PatternValidator {
       return false;
     }
 
-    this.success('pattern.yaml conforms to JSON Schema');
-
-    // Validate category against categories.config.json
-    if (validCategories && !validCategories.includes(patternData.category)) {
-      this.error(
-        `Category "${patternData.category}" is not defined in categories.config.json. ` +
-        `Valid categories: ${validCategories.join(', ')}`
-      );
-      return false;
-    }
-
-    this.success(`Category "${patternData.category}" is valid`);
+    this.success('pattern.yaml conforms to JSON Schema (including category, required fields, formats, etc.)');
 
     // Validate referenced files exist
     if (patternData.architecture_diagram) {
@@ -296,18 +258,13 @@ class PatternValidator {
     const filesValid = this.validateRequiredFiles(patternDir);
     console.log();
 
-    // 3. Load valid categories
-    this.log('📋 Step 3: Loading Categories Configuration', colors.cyan);
-    const validCategories = this.loadCategoriesConfig(repoRoot);
+    // 3. Validate pattern.yaml against JSON Schema
+    this.log('🔬 Step 3: Validating pattern.yaml', colors.cyan);
+    const yamlValid = await this.validatePatternYaml(patternDir, repoRoot);
     console.log();
 
-    // 4. Validate pattern.yaml
-    this.log('🔬 Step 4: Validating pattern.yaml', colors.cyan);
-    const yamlValid = await this.validatePatternYaml(patternDir, validCategories, repoRoot);
-    console.log();
-
-    // 5. Validate README
-    this.log('📖 Step 5: Validating README.md', colors.cyan);
+    // 4. Validate README
+    this.log('📖 Step 4: Validating README.md', colors.cyan);
     this.validateReadme(patternDir);
     console.log();
 

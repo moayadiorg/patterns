@@ -54,9 +54,15 @@
     },
     "category": {
       "type": "string",
-      "minLength": 1,
-      "pattern": "^[a-z0-9-]+$",
-      "description": "Pattern category (must match a valid category ID from categories.config.json)"
+      "enum": [
+        "automation",
+        "observability",
+        "security",
+        "monitoring",
+        "integration",
+        "data-protection"
+      ],
+      "description": "Pattern category - must be one of the predefined categories"
     },
     "tags": {
       "type": "array",
