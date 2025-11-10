@@ -25,17 +25,15 @@ Automatically validates pattern submissions against repository standards to ensu
    - `README.md` - Must exist and contain adequate documentation
    - `diagrams/` - Directory must exist
 
-3. **YAML Schema Validation**
-   - Validates `pattern.yaml` against JSON Schema
+3. **JSON Schema Validation** (Single Source of Truth)
+   - Validates `pattern.yaml` against JSON Schema (`schemas/pattern-schema.json`)
    - Ensures all required fields are present
    - Validates data types and formats
-   - Checks enum values (category, language, framework, status)
+   - Validates category enum: `automation`, `observability`, `security`, `monitoring`, `integration`, `data-protection`
+   - Checks enum values for language, framework, and status
+   - Note: `categories.config.json` is for metadata/UI only (descriptions, icons), not validation
 
-4. **Category Validation**
-   - Verifies category exists in `categories.config.json`
-   - Valid categories: `automation`, `observability`, `security`, `monitoring`, `integration`, `data-protection`
-
-5. **Referenced Files Validation**
+4. **Referenced Files Validation**
    - Ensures architecture diagrams exist if referenced
    - Validates code snippet files exist in `implementation/` directory
 
@@ -377,10 +375,12 @@ npm install
 
 ### Adding New Categories
 
-1. Update `categories.config.json` with new category
-2. Update `schemas/pattern-schema.json` enum for `category` field
-3. Update `notify-reviewers.js` with SME mapping
-4. Update this README with new category details
+1. **Update `schemas/pattern-schema.json`** - Add category to the `category` enum (primary validation source)
+2. **Update `categories.config.json`** - Add category metadata (description, icon, use cases) for UI/documentation
+3. **Update `notify-reviewers.js`** - Add SME mapping for the new category
+4. **Update this README** - Document the new category
+
+Note: JSON Schema is the single source of truth for validation. categories.config.json is for display purposes only.
 
 ### Updating Dependencies
 
