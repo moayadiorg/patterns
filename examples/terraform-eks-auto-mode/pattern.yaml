@@ -1,0 +1,104 @@
+title: Scaling Terraform Agents on Amazon EKS Auto Mode
+description: Automate Kubernetes infrastructure management by running Terraform agents on EKS Auto Mode with dynamic compute scaling and serverless node provisioning
+
+author:
+  name: HashiCorp Engineering
+  organization: HashiCorp
+
+category: infrastructure
+
+tags:
+  - terraform
+  - eks
+  - kubernetes
+  - aws
+  - auto-scaling
+  - serverless
+  - infrastructure-as-code
+  - compute-optimization
+
+hashicorp_products:
+  - name: terraform
+    version: "1.9.0"
+    edition: any
+  - name: packer
+    edition: any
+
+provider_integrations:
+  - name: AWS
+    type: cloud-provider
+    version: "5.79.0"
+  - name: Kubernetes
+    type: platform
+  - name: Amazon EKS
+    type: infrastructure
+
+use_case: |
+  Organizations running Terraform at scale need efficient agent management for CI/CD pipelines
+  and infrastructure provisioning. This pattern demonstrates how to deploy Terraform agents on
+  Amazon EKS Auto Mode to achieve:
+  - Serverless compute with automatic node provisioning
+  - Dynamic scaling based on Terraform workload demands
+  - Reduced operational overhead with managed upgrades
+  - Cost optimization through right-sized compute resources
+  - Enhanced security with automatic node rotation every 21 days
+
+prerequisites:
+  - AWS account with EKS permissions
+  - Terraform CLI installed (v1.9.0 or later)
+  - AWS provider v5.79.0 or later (for EKS Auto Mode support)
+  - kubectl configured for cluster access
+  - Basic understanding of Kubernetes and Terraform workflows
+  - HCP Terraform or Terraform Enterprise account (optional, for agent pools)
+
+implementation:
+  config_language: hcl
+  terraform_backend: s3
+  modules:
+    - name: eks
+      source: terraform-aws-modules/eks/aws
+      version: "~> 20.0"
+    - name: vpc
+      source: terraform-aws-modules/vpc/aws
+      version: "~> 5.0"
+
+architecture_diagram: diagrams/terraform-eks-auto-mode-architecture.svg
+
+benefits:
+  - Serverless node provisioning eliminates manual EC2 configuration and management
+  - Automatic node replacement every 21 days ensures security compliance
+  - Dynamic compute scaling matches Terraform agent demand without over-provisioning
+  - Managed upgrades with customizable disruption policies reduce maintenance burden
+  - Custom node pools allow workload-specific resource allocation
+  - Integration with HCP Terraform enables project-level agent pool assignment
+  - Cost optimization through automated scaling and right-sized resources
+
+security:
+  - Automatic node rotation every 21 days reduces attack surface
+  - Use IAM roles for service accounts (IRSA) for pod-level permissions
+  - Enable EKS cluster encryption at rest and in transit
+  - Implement network policies to restrict pod-to-pod communication
+  - Use AWS Secrets Manager or Vault for sensitive Terraform variables
+  - Enable audit logging for EKS control plane operations
+  - Follow principle of least privilege for agent IAM permissions
+
+limitations:
+  - EKS Auto Mode requires AWS provider version 5.79.0 or later
+  - Custom node pools may have specific instance type constraints
+  - Node rotation every 21 days requires workload tolerance for disruptions
+  - Additional costs for EKS control plane and managed nodes
+  - Limited to AWS cloud provider (not multi-cloud)
+  - Requires Terraform state backend configuration for team collaboration
+
+related_patterns:
+  - terraform-cloud-agents-on-ecs
+  - vault-eks-integration
+  - multi-region-terraform-deployment
+
+source_reference:
+  type: article
+  url: https://medium.com/hashicorp-engineering/scaling-terraform-agents-on-amazon-eks-auto-mode-for-efficient-infrastructure-management-1d64b5cb74fc
+  title: Scaling Terraform Agents on Amazon EKS Auto Mode for Efficient Infrastructure Management
+  date: 2025-01-15
+
+last_updated: 2025-01-20
