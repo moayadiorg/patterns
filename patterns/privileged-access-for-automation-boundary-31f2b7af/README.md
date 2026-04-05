@@ -1,6 +1,6 @@
 ## Overview & Problem Statement
 
-Permanent privileged accounts on mainframe systems such as IBM z/OS introduce significant security risks, including potential misuse and lack of accountability. This integration pattern addresses the need for zero standing privileges and provides a complete session audit trail by leveraging HashiCorp Boundary with IBM RACF. The goal is to enable just-in-time privileged access to z/OS systems, ensuring that privileged credentials are only provisioned when needed and all access is fully auditable.  More changes made here.  Another change.  Is it the rebase that makes it the same commit?
+Permanent privileged accounts on mainframe systems such as IBM z/OS introduce significant security risks, including potential misuse and lack of accountability. This integration pattern addresses the need for zero standing privileges and provides a complete session audit trail by leveraging HashiCorp Boundary with IBM RACF. The goal is to enable just-in-time privileged access to z/OS systems, ensuring that privileged credentials are only provisioned when needed and all access is fully auditable.  More changes made here.  Another change.  Is it the rebase that makes it the same commit? last check
 
 ## Architecture & Data Flow
 
