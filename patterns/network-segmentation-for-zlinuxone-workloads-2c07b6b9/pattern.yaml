@@ -1,0 +1,32 @@
+title: Network Segmentation for Z/LinuxOne Workloads
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-05"
+last_updated: "2026-04-05"
+architecture_diagram: []
+github_url: []
+products:
+  - Consul
+authors:
+  - name: moayad ismail
+    email: moayad1@ibm.com
+jira_link: https://hashicorp.atlassian.net/browse/ADVSA-452
+technologies:
+  - Networking
+  - Security
+  - DevOps
+tags:
+  - network-segmentation
+  - ibm-z
+  - linuxone
+  - consul
+  - service-mesh
+  - hipersockets
+  - service-discovery
+  - mainframe
+  - automation
+audience: Platform Engineers
+complexity: L300
+short_description: Automate and audit network segmentation for IBM Z and LinuxOne workloads using HashiCorp Consul, enabling service mesh and service discovery with HiperSockets integration.
+description: This integration pattern solves the challenge of managing network segmentation for IBM Z and LinuxOne workloads, where manual changes are error-prone and hard to audit. By deploying HashiCorp Consul as a service mesh and service discovery platform, organizations can automate network policy enforcement and HiperSockets configuration. The solution enables version-controlled, auditable network state and robust service discovery for Z-based microservices. Secure communication and access controls are emphasized, with all network definitions managed as code. While some manual steps remain, this approach lays the foundation for scalable, automated mainframe networking.
