@@ -1,0 +1,30 @@
+title: Privileged Access for Automation (Boundary)
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-05"
+last_updated: "2026-04-05"
+architecture_diagram: []
+github_url: []
+products:
+  - Boundary
+authors:
+  - name: moayad ismail
+    email: moayad1@ibm.com
+jira_link: https://hashicorp.atlassian.net/browse/ADVSA-450
+technologies:
+  - Security
+  - DevOps
+tags:
+  - hashicorp-boundary
+  - ibm-racf
+  - zos
+  - privileged-access
+  - dynamic-credentials
+  - session-recording
+  - audit-trail
+  - zero-standing-privilege
+audience: Security Engineers
+complexity: L300
+short_description: This integration enables just-in-time privileged access to IBM z/OS systems by brokering dynamic credentials through HashiCorp Boundary and IBM RACF, ensuring all access is time-bound and fully auditable.
+description: Permanent privileged accounts on mainframe systems pose significant security risks due to potential misuse and lack of accountability. This integration pattern leverages HashiCorp Boundary as a privileged access broker, dynamically provisioning credentials from IBM RACF for z/OS resources. All privileged sessions are brokered, recorded, and fully auditable, with credentials revoked upon session termination. The approach eliminates standing privileges, reduces attack surface, and enforces strict access controls. Security is further enhanced through session recording and comprehensive audit trails, supporting compliance and operational oversight.
