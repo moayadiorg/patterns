@@ -1,0 +1,31 @@
+title: Batch/HPC Workload Orchestration (Nomad)
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-07"
+last_updated: "2026-04-07"
+architecture_diagram: []
+github_url: []
+products:
+  - Nomad
+authors:
+  - name: system
+    email: moayad1@ibm.com
+jira_link: https://hashicorp.atlassian.net/browse/ADVSA-458
+technologies:
+  - DevOps
+  - Cloud
+  - Security
+tags:
+  - batch-orchestration
+  - hpc
+  - nomad
+  - zlinux
+  - zos
+  - jcl-migration
+  - mainframe
+  - workload-scheduler
+audience: Platform Engineers
+complexity: L300
+short_description: This integration pattern demonstrates how HashiCorp Nomad can orchestrate batch and HPC workloads on IBM z/OS and z/Linux, enabling migration from legacy JCL-based schedulers to modern, cloud-native workflows.
+description: Legacy mainframe batch schedulers often lack support for modern orchestration and container-based workflows. This pattern leverages HashiCorp Nomad to schedule and manage batch and HPC jobs on IBM z/Linux, providing a scalable, cloud-native alternative to traditional JCL-based scheduling. By encapsulating JCL logic in containers or scripts and integrating with UNIX System Services, organizations can modernize their workload orchestration while maintaining mainframe reliability. Secure communication, job monitoring, and enterprise integration are emphasized. The solution addresses migration, flexibility, and operational efficiency for mainframe environments.
