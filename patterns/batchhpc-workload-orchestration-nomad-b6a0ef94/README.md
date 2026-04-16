@@ -1,6 +1,6 @@
 ## Overview & Problem Statement
 
-Legacy mainframe batch schedulers such as CA-7 and IBM Tivoli Workload Scheduler (TWS) are limited in their ability to support modern, cloud-native orchestration patterns. Organizations running high-performance computing (HPC) or batch workloads on IBM z/OS and z/Linux are seeking to modernize their workload orchestration, enable container-based workflows, and migrate JCL-based jobs to more flexible platforms. This pattern explores the use of HashiCorp Nomad to orchestrate batch jobs on z/Linux, facilitate JCL workload migration, and enable USS batch scheduling, addressing the need for scalable, cloud-native batch processing on mainframe environments.  more stuff to add.
+Legacy mainframe batch schedulers such as CA-7 and IBM Tivoli Workload Scheduler (TWS) are limited in their ability to support modern, cloud-native orchestration patterns. Organizations running high-performance computing (HPC) or batch workloads on IBM z/OS and z/Linux are seeking to modernize their workload orchestration, enable container-based workflows, and migrate JCL-based jobs to more flexible platforms. This pattern explores the use of HashiCorp Nomad to orchestrate batch jobs on z/Linux, facilitate JCL workload migration, and enable USS batch scheduling, addressing the need for scalable, cloud-native batch processing on mainframe environments.  more stuff to add.  A quick edit.
 
 ## Architecture & Data Flow
 
@@ -59,4 +59,4 @@ This pattern is in discovery and not production-hardened. Direct orchestration o
 ## References
 
 - Source integration: Batch/HPC Workload Orchestration (Nomad) (Nomad + z/OS)
-- Jira story: 
+- Jira story: https://hashicorp.atlassian.net/browse/ADVSA-462
