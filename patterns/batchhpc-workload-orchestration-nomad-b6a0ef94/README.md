@@ -59,4 +59,4 @@ This pattern is in discovery and not production-hardened. Direct orchestration o
 ## References
 
 - Source integration: Batch/HPC Workload Orchestration (Nomad) (Nomad + z/OS)
-- Jira story: https://hashicorp.atlassian.net/browse/ADVSA-461
+- Jira story: 
