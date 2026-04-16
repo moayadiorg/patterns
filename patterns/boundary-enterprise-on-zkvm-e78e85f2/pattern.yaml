@@ -1,0 +1,31 @@
+title: Boundary Enterprise on z/KVM
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-16"
+last_updated: "2026-04-16"
+architecture_diagram: []
+github_url: []
+products:
+  - Boundary
+authors:
+  - name: moayad
+    email: moayad1@ibm.com
+technologies:
+  - Security
+  - Cloud
+  - Networking
+tags:
+  - boundary-enterprise
+  - ibm-z
+  - zkvm
+  - mainframe
+  - identity-access
+  - just-in-time-access
+  - least-privilege
+  - session-brokering
+  - secure-access
+audience: Security Engineers
+complexity: L300
+short_description: This integration demonstrates deploying HashiCorp Boundary Enterprise on IBM z/KVM to enable secure, identity-based access management for mainframe workloads.
+description: The integration addresses the challenge of providing secure, least-privilege access to critical workloads running on IBM Z mainframes by leveraging HashiCorp Boundary Enterprise on z/KVM. Boundary's controller and worker architecture is mapped to z/KVM virtual machines, enabling session brokering and policy enforcement for mainframe-hosted applications. The solution enforces strong authentication, session recording, and audit logging, while supporting network segmentation and firewall best practices. This pattern helps organizations modernize mainframe access controls, reduce operational risk, and improve compliance. Some advanced Boundary features may require further validation or configuration on z/KVM.
