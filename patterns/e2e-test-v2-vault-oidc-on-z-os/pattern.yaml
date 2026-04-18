@@ -1,0 +1,32 @@
+title: "E2E Test v2: Vault OIDC on z/OS"
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-18"
+last_updated: "2026-04-18"
+architecture_diagram: []
+github_url: []
+products:
+  - IBM Z
+authors:
+  - name: Automation Tester
+    email: automation@test.local
+technologies:
+  - Security
+  - DevOps
+  - Cloud
+tags:
+  - vault
+  - oidc
+  - ibm-z
+  - zos
+  - identity-provider
+  - azure-ad
+  - okta
+  - authentication
+  - mainframe
+  - secrets-management
+audience: Security Engineers
+complexity: L200
+short_description: Integrate HashiCorp Vault with OIDC authentication on IBM z/OS to enable secure, identity-based access to secrets for mainframe applications.
+description: This integration pattern addresses the challenge of securely managing secrets for IBM z/OS workloads by leveraging HashiCorp Vault with OIDC authentication. By federating user identities from external providers like Azure AD or Okta, mainframe applications can access Vault secrets without storing long-lived credentials. The solution centralizes access control using identity-based policies and ensures all secret access is auditable. Key benefits include improved security posture, reduced credential management overhead, and enhanced compliance for mainframe environments.
