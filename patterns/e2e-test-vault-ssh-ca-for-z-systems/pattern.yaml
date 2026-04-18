@@ -1,0 +1,28 @@
+title: "E2E Test: Vault SSH CA for Z Systems"
+description: "Reference implementation for using HashiCorp Vault as an SSH Certificate Authority for IBM Z (z/OS), enabling short-lived SSH certificates for secure administrative access."
+type: patterns
+short_description: "Use Vault as an SSH CA to issue short-lived SSH certificates for z/OS administrative access."
+audience: "Platform Engineers, Security Engineers"
+authors:
+  - name: "Automation Tester"
+    email: "automation@test.local"
+tags:
+  - vault
+  - ssh
+  - certificate-authority
+  - ibm-z
+  - zos
+  - security
+  - integration
+products:
+  - HashiCorp Vault
+  - IBM z/OS
+technologies:
+  - Vault SSH Secrets Engine
+  - OpenSSH
+  - z/OS OpenSSH
+created_date: "2026-04-18"
+last_updated: "2026-04-18"
+version: "0.1.0"
+status: experimental
+complexity: L200
