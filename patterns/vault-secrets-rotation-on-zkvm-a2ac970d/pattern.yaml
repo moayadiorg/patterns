@@ -1,0 +1,27 @@
+title: Vault Secrets Rotation on z/KVM — Pattern 3
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-18"
+last_updated: "2026-04-18"
+architecture_diagram: []
+github_url: []
+products:
+  - Vault
+authors:
+  - name: test
+    email: test@ibm.com
+technologies:
+  - Security
+  - Cloud
+tags:
+  - vault
+  - secrets-rotation
+  - z-kvm
+  - racf
+  - ibm-z
+  - integration
+audience: Security Engineers
+complexity: L100
+short_description: This integration demonstrates automated secrets rotation using HashiCorp Vault with RACF on IBM z/KVM, enhancing mainframe security and compliance.
+description: The pattern addresses the challenge of managing and rotating secrets securely on IBM z/KVM environments by integrating HashiCorp Vault with RACF. It provides a step-by-step approach to automate secrets rotation, reducing manual intervention and risk of credential exposure. The solution leverages Vault's robust secrets management capabilities to enforce security best practices on mainframe systems. Key benefits include improved compliance, reduced operational overhead, and enhanced security posture for critical workloads.
