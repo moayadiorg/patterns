@@ -1,0 +1,28 @@
+title: Terraform IaC for LinuxONE — Pattern 2
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-18"
+last_updated: "2026-04-18"
+architecture_diagram: []
+github_url: []
+products:
+  - Terraform
+authors:
+  - name: test
+    email: test@ibm.com
+technologies:
+  - DevOps
+  - Cloud
+tags:
+  - terraform
+  - iac
+  - linuxone
+  - zos
+  - integration
+  - hashicorp
+  - ibm
+audience: Platform Engineers
+complexity: L100
+short_description: This integration demonstrates how to use Terraform Infrastructure as Code (IaC) to manage IBM LinuxONE and z/OS environments.
+description: This pattern addresses the need for automated infrastructure management on IBM LinuxONE and z/OS platforms by leveraging Terraform's Infrastructure as Code capabilities. The solution provides step-by-step guidance for integrating HashiCorp Terraform with IBM mainframe environments, enabling consistent and repeatable provisioning. Key benefits include improved operational efficiency, reduced manual errors, and streamlined DevOps workflows for hybrid cloud and mainframe systems.
