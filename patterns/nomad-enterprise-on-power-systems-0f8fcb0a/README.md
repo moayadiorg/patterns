@@ -1,6 +1,6 @@
 ## Overview & Problem Statement
 
-This article examines the integration of HashiCorp Nomad Enterprise with IBM Power Systems. Currently, there is no official support or deployment option for running Nomad Enterprise on IBM Power Systems. This gap presents challenges for organizations seeking to leverage Nomad's orchestration capabilities on Power hardware.
+This article examines the integration of HashiCorp Nomad Enterprise with IBM Power Systems. Currently, there is no official support or deployment option for running Nomad Enterprise on IBM Power Systems. This gap presents challenges for organizations seeking to leverage Nomad's orchestration capabilities on Power hardware.  More updates.
 
 ## Architecture & Data Flow
 
