@@ -1,0 +1,25 @@
+title: Nomad Enterprise on Power Systems
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-19"
+last_updated: "2026-04-19"
+architecture_diagram: []
+github_url: []
+products:
+  - Nomad
+authors:
+  - name: Moayad Ismail
+    email: moayad.ismail@gmail.com
+technologies:
+  - DevOps
+tags:
+  - nomad-enterprise
+  - ibm-power-systems
+  - integration
+  - unsupported-platform
+  - orchestration
+audience: Platform Engineers
+complexity: L100
+short_description: This document explores the current lack of support for deploying HashiCorp Nomad Enterprise on IBM Power Systems, outlining the challenges and limitations organizations face.
+description: Organizations interested in leveraging HashiCorp Nomad Enterprise for workload orchestration on IBM Power Systems currently face a lack of official support and deployment options. This integration pattern highlights the absence of validated architectures, implementation steps, and security guidance for this platform combination. The document serves as a reference for understanding the current state, known limitations, and the need for future updates. It helps platform engineers assess feasibility and plan for potential future support.
