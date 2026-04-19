@@ -1,0 +1,32 @@
+title: ssh at scale
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-19"
+last_updated: "2026-04-19"
+architecture_diagram: []
+github_url: []
+products:
+  - IBM Z
+authors:
+  - name: Moayad Ismail
+    email: moayad.ismail@gmail.com
+technologies:
+  - Security
+  - DevOps
+  - Cloud
+tags:
+  - ssh
+  - hashicorp-vault
+  - certificate-authority
+  - ssh-certificates
+  - secrets-management
+  - rbac
+  - identity-based-access
+  - unix
+  - cloud
+  - hybrid
+audience: Security Engineers
+complexity: L300
+short_description: This integration pattern demonstrates how to use HashiCorp Vault as a certificate authority to provide scalable, secure, and auditable SSH access across hybrid and multi-cloud environments.
+description: Enterprises face increasing complexity and risk managing SSH access at scale, especially in hybrid and multi-cloud architectures. This solution leverages HashiCorp Vault's SSH Secrets Engine to act as a certificate authority, issuing short-lived SSH certificates based on authenticated user identity and role. By centralizing authentication and access control, organizations can enforce granular policies, simplify key management, and reduce operational overhead. The architecture minimizes credential risk, supports auditability, and requires minimal changes to SSH hosts. Integration with IBM Z (z/OS) is possible, pending validation of OpenSSH compatibility.
