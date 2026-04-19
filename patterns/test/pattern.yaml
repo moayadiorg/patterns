@@ -1,0 +1,32 @@
+title: test
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-18"
+last_updated: "2026-04-18"
+architecture_diagram: []
+github_url: []
+products:
+  - IBM Z
+authors:
+  - name: Moayad Ismail
+    email: moayad.ismail@ibm.com
+technologies:
+  - Security
+  - DevOps
+  - Cloud
+tags:
+  - hashicorp-vault
+  - ssh-ca
+  - certificate-authority
+  - ssh-certificates
+  - secrets-management
+  - rbac
+  - unix
+  - cloud
+  - ibm-z
+  - ssh-access
+audience: Platform Engineers
+complexity: L200
+short_description: This integration pattern demonstrates how to use HashiCorp Vault as an SSH certificate authority to provide secure, scalable, and auditable SSH access across hybrid and multi-cloud environments, including IBM Z.
+description: Managing SSH access at scale is challenging due to risks from static keys, complex rotation, and inconsistent workflows. This pattern leverages HashiCorp Vault's SSH Secrets Engine to act as a certificate authority, issuing short-lived SSH certificates based on authenticated user identity and role. The approach enforces identity-based security, role-based access control, and centralized auditability, while minimizing operational overhead. It is applicable to both on-premises and cloud environments, including IBM Z, and enhances security by reducing credential exposure and simplifying SSH key management. The solution requires initial Vault and SSH host configuration but delivers a consistent, secure workflow for enterprise SSH access.
