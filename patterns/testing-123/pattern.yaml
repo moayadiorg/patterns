@@ -1,0 +1,31 @@
+title: testing 123
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-22"
+last_updated: "2026-04-22"
+architecture_diagram: []
+github_url: []
+products:
+  - IBM Z
+authors:
+  - name: Moayad
+    email: moayad1@ibm.com
+technologies:
+  - DevOps
+  - Cloud
+  - Security
+tags:
+  - terraform
+  - vmware
+  - vsphere
+  - infrastructure-as-code
+  - automation
+  - iac
+  - provisioning
+  - hashicorp
+  - integration-pattern
+audience: Platform Engineers
+complexity: L200
+short_description: This integration pattern demonstrates how to use HashiCorp Terraform to automate and manage VMware vSphere resources, enabling consistent and auditable infrastructure deployments.
+description: This pattern addresses the challenge of manual, error-prone VMware infrastructure management by leveraging Infrastructure as Code (IaC) with HashiCorp Terraform. It provides a step-by-step approach to automate the provisioning and lifecycle management of VMware vSphere resources, ensuring repeatability and reducing configuration drift. The solution uses the Terraform VMware vSphere Provider to interact with VMware APIs, supporting both Terraform CLI and HCP Terraform workflows. Security best practices are highlighted, including credential management and secure API communication. The integration streamlines operations for platform teams, though some advanced VMware features may require additional configuration.
