@@ -1,0 +1,26 @@
+title: Boundary Session Management on z/VM — Pattern 1
+type: patterns
+status: active
+version: 1.0.0
+created_date: "2026-04-18"
+last_updated: "2026-04-18"
+architecture_diagram: []
+github_url: []
+products:
+  - Boundary
+authors:
+  - name: test
+    email: test@ibm.com
+technologies:
+  - Security
+tags:
+  - boundary
+  - session-management
+  - zvm
+  - racf
+  - ibm-z
+  - integration
+audience: Security Engineers
+complexity: L100
+short_description: This integration enables secure session management on IBM z/VM using HashiCorp Boundary and RACF, enhancing access control for mainframe environments.
+description: The integration addresses the challenge of managing secure sessions on IBM z/VM by leveraging HashiCorp Boundary in conjunction with IBM RACF. By combining Boundary's session brokering capabilities with RACF's robust access controls, organizations can enforce granular security policies for mainframe access. The solution streamlines authentication and authorization, reduces risk, and simplifies compliance. Key benefits include improved security posture, centralized session management, and seamless integration with existing mainframe security frameworks.
